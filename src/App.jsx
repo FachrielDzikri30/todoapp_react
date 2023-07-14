@@ -1,82 +1,18 @@
-import React, {useState, createContext} from 'react'
-import Todos from './components/Todos'
-import TodoForm from './components/TodoForm';
+/* eslint-disable no-unused-vars */
+import React from "react"
+import TodoApp from "./components/TodoApp"
+import { Route, Routes, BrowserRouter } from "react-router-dom"
 
-export const TodoContext = createContext()
-
-function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: 'Finish Progate React Course',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Have Lunch with Guru Domba',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Study React with Ninja Ken',
-      completed: false,
-    },
-  ])
-
-  const addTodo = (todoTitle) => {
-    if(todoTitle === ''){
-      return
-    }
-
-    const newTodo = {
-      id: todos.length +1,
-      title: todoTitle,
-      completed: false,
-    }
-
-    const updatedTodos = todos.concat(newTodo)
-    setTodos(updatedTodos)
-  }
-
-  const toggleCompleted = (todoId) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === todoId){
-        todo.completed = !todo.completed
-      }
-      return todo
-    })
-    setTodos(updatedTodos)
-  }
-
-  const deleteTodo = (todoId) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId)
-    setTodos(updatedTodos)
-  }
-
+const App = () => {
   return (
-    <TodoContext.Provider value = {{toggleCompleted, deleteTodo}}>
-      <div style={styles.container}>
-        <h1 style={styles.title}>My Todo List</h1>
-        <TodoForm addTodo={addTodo} />
-        <Todos 
-          todos={todos}
-          // toggleCompleted={toggleCompleted}
-          // deleteTodo={deleteTodo}
-        />
-      </div>
-    </TodoContext.Provider>
-  )
+    <>
+      <BrowserRouter basename="/todoapp_react/">
+        <Routes>
+          <Route path='/' element={<TodoApp />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+};
 
-}
-
-const styles = {
-  container: {
-    textAlign: 'center',
-    padding: '12px',
-  },
-  title: {
-    fontSize: '36px',
-  },
-}
-
-export default App;
+export default App

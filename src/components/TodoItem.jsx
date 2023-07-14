@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useContext } from 'react'
-import { TodoContext } from '../App'
+import { TodoContext } from './TodoApp'
 
 const TodoItem = ({todo}) => {
 
